@@ -256,5 +256,16 @@ onMounted(async () => {
 }
 .request-ride-page__dialog {
     width: min(94vw, 520px);
+    text-align: center;
+}
+.request-ride-page__dialog :deep(.q-date),
+.request-ride-page__dialog :deep(.q-time) {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 0 !important;
+    width: 100% !important;
+}
+.request-ride-page__dialog :deep(.row.justify-end) {
+    justify-content: center;
 }
 </style>
