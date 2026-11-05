@@ -1,0 +1,400 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+    --vamo-blue: #c73d17;
+    --vamo-blue-hover: #f0532a;
+    --vamo-blue-dark: #0f3554;
+    --vamo-ink: #0f1b2d;
+    --vamo-paper: #faf6f1;
+    --vamo-green: #0e8574;
+    --vamo-green-soft: #dcf0ec;
+    --vamo-terra-soft: #fde9e1;
+    --vamo-muted: #52606d;
+    --vamo-placeholder: #8a96a3;
+    --vamo-amber: #f5a524;
+    --vamo-red: #d64545;
+    --vamo-border: #e8e1d6;
+    --vamo-border-strong: #d9d2c8;
+}
+
+body {
+    margin: 0;
+    background: var(--vamo-paper);
+    color: var(--vamo-ink);
+    font-family: "Inter", sans-serif;
+    min-width: 320px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+}
+
+.q-btn {
+    border-radius: 12px;
+    text-transform: none;
+    font-weight: 600;
+}
+.q-btn:not(.q-btn--round) {
+    min-height: 44px;
+}
+.q-btn:focus-visible,
+.q-field--focused .q-field__control {
+    outline: 3px solid rgba(199, 61, 23, 0.2);
+    outline-offset: 2px;
+}
+.q-field__label,
+.q-field__native,
+.q-tab__label,
+.q-table,
+.q-chip {
+    font-family: "Inter", sans-serif;
+}
+.q-page {
+    min-height: calc(100vh - 64px);
+}
+.page-background {
+    min-height: calc(100vh - 64px);
+}
+.welcome-card {
+    min-width: min(90vw, 420px);
+    border-radius: 24px;
+}
+// Quasar's QCard defaults to a 4px radius; every dialog in the app rendered sharp-cornered
+// because nothing overrode it globally. overflow: hidden clips child content to match.
+.q-dialog .q-card {
+    border-radius: 20px;
+    overflow: hidden;
+}
+.auth-card {
+    width: min(100%, 460px);
+    border-radius: 20px;
+}
+
+.auth-page {
+    align-items: flex-start;
+    padding: clamp(32px, 10vh, 88px) 20px 32px;
+}
+
+.auth-card .q-card__section {
+    padding: 28px;
+}
+
+.auth-card .q-field + .q-field {
+    margin-top: 12px;
+}
+
+.page-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 24px;
+}
+
+.brand-mark {
+    color: var(--vamo-ink);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.brand-mark span {
+    color: var(--vamo-blue);
+}
+.section-kicker {
+    color: var(--vamo-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.price {
+    color: var(--vamo-ink);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+.price-unit {
+    color: var(--vamo-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 0.35rem;
+}
+.trip-card {
+    border: 1px solid var(--vamo-border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.route-form {
+    border: 1px solid #e8e1d6;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(31, 30, 29, 0.05);
+}
+
+.route-form .q-field--outlined .q-field__control {
+    border-radius: 12px;
+}
+
+.route-form .q-field--standard {
+    margin-top: 10px;
+}
+
+.form-helper {
+    color: var(--vamo-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.empty-state {
+    border-style: dashed;
+    border-color: #d9d2c8;
+}
+
+.page-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.page-actions__secondary {
+    grid-column: 1 / -1;
+}
+
+.publish-summary {
+    border-left: 3px solid var(--vamo-blue);
+    color: var(--vamo-muted);
+    line-height: 1.55;
+    padding-left: 12px;
+}
+
+.vehicle-photo,
+.trip-card__vehicle-photo {
+    display: block;
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    background: #eee9e0;
+}
+
+.trip-card__vehicle-photo {
+    border-radius: 12px;
+    margin-top: 14px;
+}
+.trip-card--active {
+    border-color: var(--vamo-blue);
+    box-shadow: 0 12px 30px rgba(15, 27, 45, 0.12);
+}
+.trip-card__top {
+    padding: 18px 18px 14px;
+}
+.trip-card__meta {
+    color: var(--vamo-muted);
+    font-size: 0.86rem;
+}
+.trip-card__ticket {
+    border-top: 1px dashed var(--vamo-border-strong);
+    padding: 14px 18px 16px;
+    position: relative;
+}
+.trip-card__ticket::before,
+.trip-card__ticket::after {
+    background: var(--vamo-paper);
+    border: 1px solid var(--vamo-border);
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    position: absolute;
+    top: -8px;
+    width: 14px;
+}
+.trip-card__ticket::before {
+    left: -8px;
+}
+.trip-card__ticket::after {
+    right: -8px;
+}
+.route-line {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.route-stop {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+.route-stop__dot {
+    background: #fff;
+    border: 3px solid var(--vamo-blue);
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+}
+.route-stop__dot--destination {
+    border-color: var(--vamo-green);
+}
+.route-stop__label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.route-connector {
+    border-left: 2px dotted var(--vamo-border-strong) !important;
+    height: 20px;
+    margin-left: 7px;
+}
+.route-swap {
+    align-items: center;
+    background: var(--vamo-terra-soft);
+    border-radius: 50%;
+    color: var(--vamo-blue);
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    margin: 5px 0 5px -7px;
+    width: 28px;
+    z-index: 2;
+}
+.route-form {
+    position: relative;
+}
+.route-form__line {
+    border-left: 2px dotted var(--vamo-border-strong) !important;
+    height: 22px;
+    margin-left: 18px;
+}
+.route-form__swap {
+    align-items: center;
+    background: var(--vamo-terra-soft);
+    border-radius: 50%;
+    color: var(--vamo-blue);
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    margin: -2px 0 -2px 4px;
+    width: 28px;
+}
+.status-badge {
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 9px;
+    text-transform: capitalize;
+}
+.status-badge--positive {
+    background: var(--vamo-green-soft);
+    color: #0f6b4c;
+}
+.status-badge--warning {
+    background: #fff3dc;
+    color: #9a6200;
+}
+.status-badge--negative {
+    background: #fde8e8;
+    color: #a52d2d;
+}
+.status-badge--neutral {
+    background: #eef2f6;
+    color: var(--vamo-muted);
+}
+
+.q-header {
+    background: #fff !important;
+    border-bottom: 1px solid var(--vamo-border);
+    box-shadow: none !important;
+    color: var(--vamo-ink);
+}
+.q-header .q-btn {
+    color: var(--vamo-ink) !important;
+}
+.q-footer {
+    background: #fff !important;
+    border: 0;
+    color: var(--vamo-ink);
+    padding-bottom: 0;
+}
+.q-footer .q-tab {
+    color: var(--vamo-muted);
+}
+.q-tab--active {
+    color: var(--vamo-blue) !important;
+}
+.q-tab__label {
+    font-size: 0.72rem;
+}
+.mobile-nav .q-tab {
+    min-height: 60px;
+    padding-bottom: 4px;
+}
+.mobile-nav .q-tab__icon {
+    font-size: 22px;
+}
+
+.q-page-container {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.floating-bottom-nav {
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    right: 12px;
+    border: 1px solid var(--vamo-border);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgb(15 27 45 / 14%);
+    overflow: hidden;
+    padding: 5px;
+    width: auto;
+    z-index: 7000;
+}
+
+.floating-bottom-nav .mobile-nav {
+    min-height: 64px;
+}
+
+.floating-bottom-nav .q-tab {
+    border-radius: 999px;
+    color: var(--vamo-muted);
+    margin: 0 2px;
+    min-height: 54px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.floating-bottom-nav .q-tab--active {
+    background: var(--vamo-terra-soft);
+    color: var(--vamo-blue) !important;
+}
+
+.floating-bottom-nav .q-tab__indicator {
+    display: none;
+}
+
+@media (min-width: 700px) {
+    .floating-bottom-nav {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: min(520px, calc(100vw - 32px));
+    }
+}
+
+@media (min-width: 700px) {
+    .page-shell {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

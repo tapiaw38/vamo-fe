@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">VAMO!</string>
+    <string name="title_activity_main">VAMO!</string>
+    <string name="package_name">ar.vamo.app</string>
+    <string name="custom_url_scheme">ar.vamo.app</string>
+</resources>

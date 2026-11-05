@@ -1,0 +1,18 @@
+# Dependencies and Quasar/Vite output
+node_modules/
+.quasar/
+dist/
+
+# Local environment and tooling
+.env
+.env.*
+!.env.example
+coverage/
+.DS_Store
+
+# Android local/generated build files
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/capacitor-cordova-android-plugins/build/

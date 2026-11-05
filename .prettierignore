@@ -1,0 +1,7 @@
+node_modules
+dist
+.quasar
+android
+src-capacitor
+coverage
+package-lock.json
