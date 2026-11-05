@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
-import { QBtn, QBtnToggle, QCard, QIcon, QInput, QPage } from "quasar";
+import { QBtn, QBtnToggle, QCard, QDate, QDialog, QIcon, QInput, QPage } from "quasar";
 import RouteAutocompleteBox from "../components/RouteAutocompleteBox.vue";
 import { useTrips } from "../composables/useTrips";
 import type { RouteLocation } from "../types/routeLocation";
@@ -8,6 +8,7 @@ import { vehicleTypeOptions } from "../utils/labels";
 
 const trips = useTrips();
 const hasSearched = ref(false);
+const dateDialog = ref(false);
 const emptyLocation = (): RouteLocation => ({ id: "", name: "", address: "" });
 const form = reactive({
     origin: emptyLocation(),
@@ -18,6 +19,14 @@ const form = reactive({
 });
 
 const canSearch = computed(() => Boolean(form.origin.id && form.destination.id));
+const dateLabel = computed(() => {
+    if (!form.date) return "Cualquier fecha";
+
+    return new Date(`${form.date}T12:00:00`).toLocaleDateString("es-AR", {
+        day: "numeric",
+        month: "short",
+    });
+});
 
 const swapRoute = () => {
     if (!canSearch.value) return;
@@ -66,17 +75,79 @@ const search = async () => {
             </div>
 
             <div class="trip-search__filters">
-                <QInput v-model="form.date" label="Fecha" type="date" outlined dense class="col" />
-                <QInput
-                    v-model.number="form.passengers"
-                    label="Pasajeros"
-                    type="number"
-                    min="1"
-                    outlined
-                    dense
-                    class="col"
+                <QBtn
+                    no-caps
+                    outline
+                    color="primary"
+                    icon="calendar_month"
+                    :label="dateLabel"
+                    class="trip-search__date"
+                    @click="dateDialog = true"
                 />
+                <div class="trip-search__stepper">
+                    <QBtn
+                        flat
+                        round
+                        dense
+                        icon="remove"
+                        color="primary"
+                        aria-label="Quitar un pasajero"
+                        :disable="form.passengers <= 1"
+                        @click="form.passengers = Math.max(1, form.passengers - 1)"
+                    />
+                    <span class="trip-search__stepper-value">
+                        {{ form.passengers }}
+                        {{ form.passengers === 1 ? "pasajero" : "pasajeros" }}
+                    </span>
+                    <QBtn
+                        flat
+                        round
+                        dense
+                        icon="add"
+                        color="primary"
+                        aria-label="Agregar un pasajero"
+                        :disable="form.passengers >= 8"
+                        @click="form.passengers = Math.min(8, form.passengers + 1)"
+                    />
+                </div>
             </div>
+
+            <QDialog v-model="dateDialog">
+                <QCard class="q-pa-md trip-search__date-dialog">
+                    <div class="text-h6">Fecha de salida</div>
+                    <div class="form-helper q-mt-xs">
+                        Elegí una fecha o buscá todas las salidas.
+                    </div>
+                    <!-- minimal drops QDate's header, which renders as an empty coloured block
+                         with placeholder dashes while no date is picked. -->
+                    <QDate
+                        v-model="form.date"
+                        mask="YYYY-MM-DD"
+                        color="primary"
+                        minimal
+                        class="q-mt-sm"
+                    />
+                    <div class="row justify-end q-gutter-sm q-mt-md">
+                        <QBtn
+                            no-caps
+                            flat
+                            color="primary"
+                            label="Limpiar fecha"
+                            @click="
+                                form.date = '';
+                                dateDialog = false;
+                            "
+                        />
+                        <QBtn
+                            no-caps
+                            unelevated
+                            color="primary"
+                            label="Aplicar fecha"
+                            @click="dateDialog = false"
+                        />
+                    </div>
+                </QCard>
+            </QDialog>
 
             <div class="trip-search__label">Tipo de vehículo</div>
             <QBtnToggle
@@ -196,6 +267,41 @@ const search = async () => {
 .trip-search__filters {
     display: flex;
     gap: 10px;
+}
+.trip-search__date {
+    align-self: stretch;
+    border-radius: 999px;
+    flex: 1 1 0;
+    min-height: 48px;
+}
+.trip-search__stepper {
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--vamo-border);
+    border-radius: 999px;
+    display: flex;
+    flex: 1 1 0;
+    gap: 2px;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 0 6px;
+}
+.trip-search__stepper-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+.trip-search__filters :deep(.q-field) {
+    flex: 1 1 0;
+}
+.trip-search__date-dialog {
+    border-radius: 20px;
+    max-width: min(94vw, 380px);
+    width: 100%;
+}
+.trip-search__date-dialog :deep(.q-date) {
+    margin-inline: auto;
 }
 .trip-search__label {
     color: var(--vamo-muted);
